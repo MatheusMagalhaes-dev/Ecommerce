@@ -79,7 +79,7 @@ UserController.patch(
     }
   }
 );
-UserController.delete('/:id', validate(getUserSchema), async (req, res) => {
+UserController.delete('/:id', validate(deleteUserSchema), async (req, res) => {
   try {
     const { id } = req.params;
 

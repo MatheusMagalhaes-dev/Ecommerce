@@ -2,6 +2,7 @@ import { model, Schema } from 'mongoose';
 
 //ts
 import { IUser } from '../ts';
+import { string } from 'zod';
 
 const UserSchema = new Schema<IUser>(
   {
@@ -15,6 +16,10 @@ const UserSchema = new Schema<IUser>(
       unique: true,
     },
     password: {
+      type: String,
+      required: true,
+    },
+    cep: {
       type: String,
       required: true,
     },
