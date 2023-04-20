@@ -1,22 +1,26 @@
-import { Router, response } from 'express';
+import { Router } from 'express';
 
-//repositores
-import { UserRepository } from '../repositories';
-import { IUser } from '../ts';
-//  Validates
-import { validate } from '../middlewares/validate.middleware';
-//  Schemas
+// Repositories
+import { UserRepository } from '@repositories';
+
+// Middlewares
+import { validate } from '@middlewares';
+
+// Schemas
 import {
   createUserSchema,
   getUserSchema,
   updateUserSchema,
   updateUserPasswordSchema,
   deleteUserSchema,
-} from '../schemas/user.schemas';
+} from '@schemas';
 
+// TS
+import { IUser } from '@ts';
+
+/** Responsável por gerenciar as contas dos usuários */
 const UserController = Router();
 
-//Pegar todos os usuarios
 UserController.get('/', async (req, res) => {
   try {
     const users = await UserRepository.getUsers();
@@ -26,7 +30,7 @@ UserController.get('/', async (req, res) => {
     console.error(error);
   }
 });
-//Pegar Usuarios por ID
+
 UserController.get('/:id', validate(getUserSchema), async (req, res) => {
   try {
     const { id } = req.params;
@@ -38,31 +42,32 @@ UserController.get('/:id', validate(getUserSchema), async (req, res) => {
     console.error(error);
   }
 });
-//Post do usuario
+
 UserController.post('/', validate(createUserSchema), async (req, res) => {
   try {
-    const user: IUser = req.body;
+    const data: IUser = req.body;
 
-    const response = await UserRepository.createUser(user);
+    const response = await UserRepository.createUser(data);
 
     return res.send(response);
   } catch (error) {
     console.error(error);
   }
 });
-//update do user e do id
+
 UserController.put('/:id', validate(updateUserSchema), async (req, res) => {
   try {
     const { id } = req.params;
-    const user: IUser = req.body;
+    const data: IUser = req.body;
 
-    const response = await UserRepository.updateUser(id, user);
+    const response = await UserRepository.updateUser(id, data);
 
     return res.send(response);
   } catch (error) {
     console.error(error);
   }
 });
+
 UserController.patch(
   '/:id/password',
   validate(updateUserPasswordSchema),
@@ -79,13 +84,14 @@ UserController.patch(
     }
   }
 );
+
 UserController.delete('/:id', validate(deleteUserSchema), async (req, res) => {
   try {
     const { id } = req.params;
 
     await UserRepository.deleteUser(id);
 
-    return res.send({ message: 'User deleted ' });
+    return res.send();
   } catch (error) {
     console.error(error);
   }

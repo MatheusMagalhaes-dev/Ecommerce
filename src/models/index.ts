@@ -1,4 +1,4 @@
-export * from './user.models';
-export * from './product.model';
 export * from './cart.model';
-export * from './order.models';
+export * from './order.model';
+export * from './product.model';
+export * from './user.model';

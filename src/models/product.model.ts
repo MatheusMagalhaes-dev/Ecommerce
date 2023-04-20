@@ -1,9 +1,9 @@
 import { model, Schema } from 'mongoose';
 
-//ts
-import { IProduct } from '../ts';
+// TS
+import { IProduct } from '@ts';
 
-const UserSchema = new Schema<IProduct>(
+const ProductSchema = new Schema<IProduct>(
   {
     name: {
       type: String,
@@ -25,4 +25,4 @@ const UserSchema = new Schema<IProduct>(
   { timestamps: true }
 );
 
-export const ProductModel = model('Product', UserSchema);
+export const ProductModel = model('Product', ProductSchema);

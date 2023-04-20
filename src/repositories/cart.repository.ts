@@ -1,8 +1,8 @@
-import { error } from 'console';
+// Schemas
 import { CartModel } from '@models';
 
-//ts
-import { ICart } from '../ts';
+// TS
+import { ICart } from '@ts';
 
 export const CartRepository = {
   async getCart(userId: string) {
@@ -30,7 +30,9 @@ export const CartRepository = {
 
   async updateCart(userId: string, cart: ICart) {
     try {
-      const response = await CartModel.findOneAndDelete({ user: userId }).lean();
+      const response = await CartModel.findOneAndUpdate({ user: userId }, cart, {
+        new: true,
+      }).lean();
 
       return response;
     } catch (error) {

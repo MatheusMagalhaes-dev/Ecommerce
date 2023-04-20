@@ -1,22 +1,23 @@
-import { Router, response } from 'express';
+import { Router } from 'express';
 
-//repositories
-import { CartRepository } from '../repositories';
+// Repositories
+import { CartRepository } from '@repositories';
 
-//middlewares
-import { validate } from '../middlewares/validate.middleware';
+// Middlewares
+import { validate } from '@middlewares';
 
-//ts
-import { ICart } from '../ts';
+// TS
+import { ICart } from '@ts';
 
-//schemas
+// Schemas
 import {
   createCartSchema,
   deleteCartSchema,
-  updateCartSchema,
   getCartSchema,
-} from '../schemas/carts.schema';
+  updateCartSchema,
+} from '@schemas';
 
+/** Responsável por gerenciar o carrinho de compras dos usuários */
 const CartController = Router();
 
 CartController.get('/:userId', validate(getCartSchema), async (req, res) => {

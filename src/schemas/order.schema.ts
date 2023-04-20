@@ -18,6 +18,7 @@ export const createOrderSchema = z.object({
       city: z.string().min(3).max(50),
       state: z.string().min(2).max(2),
       country: z.string().min(3).max(50),
+      zipCode: z.string().min(3).max(50),
     }),
     observation: z.string().max(100).optional(),
   }),

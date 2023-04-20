@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import { z } from 'zod';
 
 export const getProductsSchema = z.object({
@@ -10,14 +11,14 @@ export const getProductsSchema = z.object({
 
 export const getProductSchema = z.object({
   params: z.object({
-    id: z.string(),
+    id: z.custom(isValidObjectId),
   }),
 });
 
 export const createProductSchema = z.object({
   body: z.object({
     name: z.string().min(10).max(100),
-    description: z.string().min(20).max(50),
+    description: z.string().min(20),
     price: z.number().min(0),
     stock: z.number().min(0),
   }),
@@ -26,17 +27,17 @@ export const createProductSchema = z.object({
 export const updateProductSchema = z.object({
   body: z.object({
     name: z.string().min(3).max(50).optional(),
-    description: z.string().min(20).max(50).optional(),
+    description: z.string().min(20).optional(),
     price: z.number().min(0).optional(),
     stock: z.number().min(0).optional(),
   }),
   params: z.object({
-    id: z.string(),
+    id: z.custom(isValidObjectId),
   }),
 });
 
 export const deleteProductSchema = z.object({
   params: z.object({
-    id: z.string(),
+    id: z.custom(isValidObjectId),
   }),
 });

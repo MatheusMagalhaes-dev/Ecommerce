@@ -1,9 +1,10 @@
-export interface IUser {
-  _id: string;
+import { IAddress, TTimestamps } from '@ts';
+
+export interface IUser extends TTimestamps {
   name: string;
   email: string;
+  avatar?: string;
   password: string;
-  cep: string;
-  createdAt: Date;
-  updatedAt: Date;
+  billingAddress?: IAddress;
+  deliveryAddress?: IAddress;
 }

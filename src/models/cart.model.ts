@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 
-//ts
-import { ICart } from '../ts';
+// TS
+import { ICart } from '@ts';
 
 const CartSchema = new Schema<ICart>(
   {
