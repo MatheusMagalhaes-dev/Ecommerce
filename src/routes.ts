@@ -11,7 +11,7 @@ import {
 } from './controllers';
 
 // Middlewares
-import { authenticateToken, errorLogger } from '@middlewares';
+import { authenticateToken } from '@middlewares';
 
 const routes = Router();
 
